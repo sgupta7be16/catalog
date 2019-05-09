@@ -1,0 +1,8 @@
+.pagination-1 li a {
+  border: 1px solid #ddd;
+  color: #666;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 15px;
+}
