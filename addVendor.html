@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+    <head>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Author Meta -->
+        <meta name="author" content="CodePixar">
+        <!-- Meta Description -->
+        <meta name="description" content="">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="">
+        <!-- meta character set -->
+        <meta charset="utf-8">
+
+        <!-- Site Title -->
+        <title>Styldod Catalog</title>
+        
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100|Poppins:300,400,700">
+
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.css">
+        <link rel="stylesheet" href="css/nice-select.css">
+        <link rel="stylesheet" href="css/selectize.default.css">
+        <link rel="stylesheet" href="css/et-line.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/odometer-theme-minimal.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/jquery.mb.YTPlayer.min.css">
+        <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="css/bootstrap-editable.css">
+        <link rel="stylesheet" href="css/ion.rangeSlider.css">
+        <link rel="stylesheet" href="css/ion.rangeSlider.skinNice.css">
+        <link rel="stylesheet" href="css/star-rating.css">
+        <link rel="stylesheet" href="css/theme/krajee-fa/theme.min.css">
+        <link rel="stylesheet" href="css/bootstrap-switch.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+		<style>
+		.font13 { font-size: 13px; }
+		.registerCont { margin-top: -60px; }
+		.inputBox { background-color: rgb(255,255,255) !important; }
+		.inputBox:focus { background-color: rgb(252,232,232) !important; }
+		
+		@media (max-width: 1080px)
+		{
+			.registerCont { margin-top: -35px; }
+			.logoCont { position: relative; top: -20px; }
+		}
+		</style>
+		
+        <script src="js/vendor/jquery-2.2.4.min.js"></script>
+		<script src="js/ajax.js"></script>
+		
+		<script>
+		var loginPHPUrl = "https://styldod.in/catalog/php/login_v1.php";
+		var registerPHPUrl = "https://styldod.in/catalog/php/register_v1.php";
+		var catalogPHPUrl = "https://styldod.in/catalog/php/catalog.php";
+		var redirectUrl = "https://styldod.in/catalog/";
+		
+		var username = "";
+		var password = "";
+		
+		function doRegister(elem)
+		{
+			username = elem.parentNode.usernameReg.value.trim();
+			password = elem.parentNode.passwordReg.value.trim();
+			name = elem.parentNode.nameReg.value.trim();
+			contactno = elem.parentNode.contactnoReg.value.trim();
+			city = elem.parentNode.cityReg.value.trim();
+		
+			if(username == "")
+			{
+				alert("Username is empty!");
+			}			
+			else if(password == "")
+			{
+				alert("Password is empty!");
+			}
+			else if(name == "")
+			{
+				alert("Name is empty!");
+			}
+			else if(contactno == "")
+			{
+				alert("Contact No. is empty!");
+			}
+			else if(city == "")
+			{
+				alert("City is empty!");
+			}
+			else
+			{
+				ajax.post(registerPHPUrl, {username: username, password: password, name: name, contactno: contactno, city: city}, null, doRegisterResponse);
+			}
+			
+			return false;
+		}
+		
+		function doRegisterResponse(responseData)
+		{
+			if(responseData.trim().indexOf("failed:") > -1)
+			{
+				var errorMessage = responseData.trim().split(":")[1];
+				alert("Error: " + errorMessage);
+			}
+			else if(responseData.trim().indexOf("success:") > -1)
+			{
+				var successMessage = responseData.trim().split(":")[1];
+				alert(successMessage);
+				
+				window.location.href = redirectUrl;
+			}
+		}
+		
+		</script>
+		
+    </head>
+
+    
+    <body>
+        
+        <main id="main" class="site-content">
+            <section class="section-login-register parallax-bg half-bg" style="background-image: url('img/slider/login-bg.jpg');">
+                <span class="half-bg-container right-bg white-bg" style="background-color:rgba(255,255,255,0.8);"></span> 
+                <div class="container">
+                    <div class="row flex fullscreen disable-fullscreen-xs disable-flex-xs relative">
+                        <div class="col-xs-12 col-md-offset-6 col-md-6 col-lg-offset-7 col-lg-5 z-index-2 flex flex-middle flex-center">
+                            <div class="page-login-wrapper flex-grow text-center">
+                                <a href="./" class="login-logo inline mb-20 logoCont">
+                                    <img src="img/logo.png" alt="" width="180">
+                                </a>
+                                <!-- Nav tabs -->
+                                <ul class="masonry-filter tab style-3 dark text-uppercase mb-70 font16">
+                                    <li class="active"><a href="#tab-register" data-toggle="tab" style="padding:0 15px 10px;">Register</a></li>
+                                </ul>
+                            
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+								    <form action="" method="post" id="tab-register" class="tab-pane matex-login text-center fade in active registerCont">
+                                        <div class="round-input text-left mb-10 font13">
+                                            <label for="usernameReg" class="block title-color fw300 fz-14 mb-5 ml-30 font13">Username</label>
+                                            <span class="icon-input relative block">
+                                                <span class="icon fz-18"><i class="et-line icon-profile-male"></i></span>
+                                                <input class="inputBox" type="text" name="usernameReg" id="usernameReg" placeholder="e.g. styldod" autocomplete="off">
+                                            </span>
+                                        </div>
+                                        <div class="round-input text-left mb-10 font13">
+                                            <label for="passwordReg" class="block title-color fw300 fz-14 mb-5 ml-30 font13">Password</label>
+                                            <span class="icon-input relative block">
+                                                <span class="icon fz-18"><i class="et-line icon-lock"></i></span>
+                                                <input class="inputBox" type="password" name="passwordReg" id="passwordReg" placeholder="e.g. 1234@abcd" autocomplete="off">
+                                            </span>
+                                        </div>
+										
+										<div class="round-input text-left mb-10 font13">
+                                            <label for="nameReg" class="block title-color fw300 fz-14 mb-5 ml-30 font13">Vendor Name</label>
+                                            <span class="icon-input relative block">
+                                                <span class="icon fz-18"><i class="et-line icon-ribbon"></i></span>
+                                                <input class="inputBox" type="text" name="nameReg" id="nameReg" placeholder="e.g. D P Jangid" autocomplete="off">
+                                            </span>
+                                        </div>
+										
+										<div class="round-input text-left mb-10 font13">
+                                            <label for="contactnoReg" class="block title-color fw300 fz-14 mb-5 ml-30 font13">Contact No.</label>
+                                            <span class="icon-input relative block">
+                                                <span class="icon fz-18"><i class="et-line icon-phone"></i></span>
+                                                <input class="inputBox" type="text" name="contactnoReg" id="contactnoReg" placeholder="e.g. 09876543210" autocomplete="off">
+                                            </span>
+                                        </div>
+																				
+										<div class="round-input text-left mb-30 font13">
+                                            <label for="cityReg" class="block title-color fw300 fz-14 mb-5 ml-30 font13">City</label>
+                                            <span class="icon-input relative block">
+                                                <span class="icon fz-18"><i class="et-line icon-map-pin"></i></span>
+                                                <input class="inputBox" type="text" name="cityReg" id="cityReg" placeholder="e.g. Bangalore" autocomplete="off">
+                                            </span>
+                                        </div>
+                                        <button type="button" class="waves-effect btn-large btn-round text-uppercase w100" onclick="doRegister(this);">Add Vendor</button>
+                                    </form>
+                                </div>
+                            </div> <!-- end. page-login-wrapper -->
+                        </div> <!-- end .col- -->
+                    </div> <!-- end .row -->
+                </div> <!-- end .container -->
+            </section>
+        </main> <!--  .site-content  -->
+
+
+        <!--
+        JavaScripts
+        ========================== -->
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/materialize.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.parallax-1.1.3.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/odometer.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/form.min.js"></script>
+        <script src="js/jquery-validation.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/selectize.min.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="libs/tweetie.min.js"></script>
+        <script src="js/jribbble.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/nouislider.min.js"></script>
+        <script src="js/jquery.mb.YTPlayer.min.js"></script>
+        <script src="js/jquery.stickr.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js"></script>
+        <script src="js/bootstrap-editable.min.js"></script>
+        <script src="js/fileinput.min.js"></script>
+        <script src="js/jquery.easypiechart.min.js"></script>
+        <script src="js/ion.rangeSlider.min.js"></script>
+        <script src="js/star-rating.min.js"></script>
+        <script src="css/theme/krajee-fa/theme.min.js"></script>
+        <script src="js/typeahead.jquery.min.js"></script>
+        <script src="js/bootstrap-switch.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
